@@ -6,22 +6,19 @@ import { useState } from "react";
 import Stripe from "stripe";
 import { stripe } from "../../lib/stripe";
 import { ImageContainer, ProductContainer, ProductDetails } from "../../styles/pages/product"
-
-interface ProductProps {
-  product: {
-    id: string
-    name: string
-    imageUrl: string
-    price: string
-    description: string
-    defaultPriceId: string
-  }
-}
+import { ProductProps } from "../../types/IProduct";
+import { useDispatch, useSelector } from 'react-redux'
+import { addToCart } from "../../store/features/cart/cartSlice";
+import { RootState } from "../../store/config";
 
 export default function Product({ product }: ProductProps) {
   const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false);
+  const dispatch = useDispatch()
 
-  async function handleBuyButton() {
+  const items = useSelector((state: RootState) => state.cart.items)
+  const alreadyStored = !!items.find(item => item.id === product.id)
+
+  /* async function handleBuyButton() {
     try {
       setIsCreatingCheckoutSession(true);
 
@@ -37,6 +34,10 @@ export default function Product({ product }: ProductProps) {
 
       alert('Falha ao redirecionar ao checkout!')
     }
+  } */
+
+  function handleBuyButton() {
+    dispatch(addToCart(product))
   }
 
   return (
@@ -56,8 +57,8 @@ export default function Product({ product }: ProductProps) {
 
           <p>{product.description}</p>
 
-          <button disabled={isCreatingCheckoutSession} onClick={handleBuyButton}>
-            Comprar agora
+          <button disabled={isCreatingCheckoutSession || alreadyStored} onClick={handleBuyButton}>
+            Colocar na sacola
           </button>
         </ProductDetails>
       </ProductContainer>

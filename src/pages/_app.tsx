@@ -5,17 +5,24 @@ import logoImg from "../assets/logo.svg"
 import { Container, Header } from "../styles/pages/app"
 
 import Image from "next/future/image"
+import {Provider} from 'react-redux'
+import { store } from "../store/config"
+import { Cart } from "../components/Cart"
 
 globalStyles()
 
 function App({ Component, pageProps }: AppProps) {
   return (
     <Container>
-      <Header>
-        <Image src={logoImg} alt="" />
-      </Header>
+      <Provider store={store}>
+        <Header>
+          <Image src={logoImg} alt="Logo da loja" />
 
-      <Component {...pageProps} />
+          <Cart />
+        </Header>
+
+        <Component {...pageProps} />
+      </Provider>
     </Container>
   )
 }
