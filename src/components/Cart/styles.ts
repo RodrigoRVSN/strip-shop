@@ -1,10 +1,12 @@
 import { styled } from "@stitches/react";
 
-export const CartContainer = styled('div', {
+export const CartContainer = styled('button', {
   position: 'relative',
   padding: 12,
   backgroundColor: '#202024',
-  borderRadius: 6
+  borderRadius: 6,
+  cursor: 'pointer',
+  border: 0,
 })
 
 export const Counter = styled('span', {
@@ -18,5 +20,4 @@ export const Counter = styled('span', {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  
 })
