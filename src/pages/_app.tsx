@@ -8,15 +8,20 @@ import Image from "next/future/image"
 import {Provider} from 'react-redux'
 import { store } from "../store/config"
 import { Cart } from "../components/Cart"
+import { useRouter } from "next/router"
 
 globalStyles()
 
 function App({ Component, pageProps }: AppProps) {
+  const { push } = useRouter()
+
+  const goToHome = () => push('/')
+
   return (
     <Container>
       <Provider store={store}>
         <Header>
-          <Image src={logoImg} alt="Logo da loja" />
+          <Image onClick={goToHome} src={logoImg} alt="Logo da loja" />
 
           <Cart />
         </Header>
