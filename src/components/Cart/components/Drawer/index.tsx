@@ -1,8 +1,7 @@
 import * as S from './styles'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../../../store/config'
+import { useDispatch } from 'react-redux'
 import Image from 'next/image'
-import { removeFromCart } from '../../../../store/features/cart/cartSlice'
+import { removeFromCart, useCartReducer } from '../../../../store/features/cart/cartSlice'
 import { IProduct } from '../../../../types/IProduct'
 import axios from 'axios'
 
@@ -11,7 +10,7 @@ interface DrawerProps {
 }
 
 export const Drawer = ({ toggleOpen }: DrawerProps) => {
-  const { countItems, items, totalPrice } = useSelector((state: RootState) => state.cart)
+  const { countItems, items, totalPrice } = useCartReducer()
   
   const dispatch = useDispatch()
 

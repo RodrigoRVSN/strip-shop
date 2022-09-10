@@ -1,20 +1,17 @@
-import axios from "axios";
 import { GetStaticPaths, GetStaticProps } from "next"
 import Image from "next/future/image";
 import Head from "next/head";
-import { useState } from "react";
 import Stripe from "stripe";
 import { stripe } from "../../lib/stripe";
 import { ImageContainer, ProductContainer, ProductDetails } from "../../styles/pages/product"
 import { ProductProps } from "../../types/IProduct";
-import { useDispatch, useSelector } from 'react-redux'
-import { addToCart } from "../../store/features/cart/cartSlice";
-import { RootState } from "../../store/config";
+import { useDispatch } from 'react-redux'
+import { addToCart, useCartReducer } from "../../store/features/cart/cartSlice";
 
 export default function Product({ product }: ProductProps) {
   const dispatch = useDispatch()
 
-  const items = useSelector((state: RootState) => state.cart.items)
+  const { items } = useCartReducer()
   const alreadyStored = !!items.find(item => item.id === product.id)
 
   function handleBuyButton() {

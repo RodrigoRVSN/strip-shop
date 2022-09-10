@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { IProduct } from '../../../types/IProduct'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../config'
 
 export interface CartState {
   countItems: number
@@ -36,3 +38,5 @@ export const cartSlice = createSlice({
 
 export const { addToCart, removeFromCart } = cartSlice.actions
 export default cartSlice.reducer
+
+export const useCartReducer = () => useSelector((state: RootState) => state.cart)
