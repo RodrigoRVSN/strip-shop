@@ -4,6 +4,7 @@ import { RootState } from '../../../../store/config'
 import Image from 'next/image'
 import { removeFromCart } from '../../../../store/features/cart/cartSlice'
 import { IProduct } from '../../../../types/IProduct'
+import axios from 'axios'
 
 interface DrawerProps {
   toggleOpen: () => void
@@ -17,6 +18,22 @@ export const Drawer = ({ toggleOpen }: DrawerProps) => {
   const handleRemoveItem = (product: IProduct) => {
     dispatch(removeFromCart(product))
   }
+
+
+  async function handleBuyButton() {
+    try {
+      const response = await axios.post('/api/checkout', {
+        items
+      })
+
+      const { checkoutUrl } = response.data;
+
+      window.location.href = checkoutUrl;
+    } catch (err) {
+      alert('Falha ao redirecionar ao checkout!')
+    }
+  }
+
 
   return (
     <S.DrawerContainer>
@@ -61,7 +78,7 @@ export const Drawer = ({ toggleOpen }: DrawerProps) => {
         </S.OrderItem>
       </S.OrderInfo>
 
-      <S.ButtonFinished>
+      <S.ButtonFinished onClick={handleBuyButton}>
         Finalizar compra
       </S.ButtonFinished>
     </S.DrawerContainer>

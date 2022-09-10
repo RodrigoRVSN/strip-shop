@@ -12,29 +12,10 @@ import { addToCart } from "../../store/features/cart/cartSlice";
 import { RootState } from "../../store/config";
 
 export default function Product({ product }: ProductProps) {
-  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false);
   const dispatch = useDispatch()
 
   const items = useSelector((state: RootState) => state.cart.items)
   const alreadyStored = !!items.find(item => item.id === product.id)
-
-  /* async function handleBuyButton() {
-    try {
-      setIsCreatingCheckoutSession(true);
-
-      const response = await axios.post('/api/checkout', {
-        priceId: product.defaultPriceId,
-      })
-
-      const { checkoutUrl } = response.data;
-
-      window.location.href = checkoutUrl;
-    } catch (err) {
-      setIsCreatingCheckoutSession(false);
-
-      alert('Falha ao redirecionar ao checkout!')
-    }
-  } */
 
   function handleBuyButton() {
     dispatch(addToCart(product))
@@ -57,7 +38,7 @@ export default function Product({ product }: ProductProps) {
 
           <p>{product.description}</p>
 
-          <button disabled={isCreatingCheckoutSession || alreadyStored} onClick={handleBuyButton}>
+          <button disabled={alreadyStored} onClick={handleBuyButton}>
             Colocar na sacola
           </button>
         </ProductDetails>
