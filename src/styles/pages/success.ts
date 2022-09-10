@@ -41,8 +41,8 @@ export const ImageContainer = styled('div', {
   maxWidth: 130,
   height: 145,
   background: 'linear-gradient(180deg, #1ea483 0%, #7465d4 100%)',
-  borderRadius: 8,
-  padding: '0.25rem',
+  borderRadius: '50%',
+  padding: '2.5rem',
   marginTop: '4rem',
 
   display: 'flex',
@@ -52,5 +52,16 @@ export const ImageContainer = styled('div', {
 
   img: {
     objectFit: 'cover',
-  }
+  },
+  '& + &': {
+    transform: 'translateX(-3rem)',
+  },
 });
+
+
+export const ImagesWrapper = styled('section', {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+});
+
