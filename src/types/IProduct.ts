@@ -5,6 +5,7 @@ export interface IProduct {
   price: string
   description: string
   defaultPriceId: string
+  productPrice: number
 }
 
 export interface ProductProps {

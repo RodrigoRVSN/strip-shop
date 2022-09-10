@@ -6,18 +6,15 @@ import Link from "next/link"
 import { useKeenSlider } from 'keen-slider/react'
 
 import { stripe } from "../lib/stripe"
-import { HomeContainer, Product } from "../styles/pages/home"
+import * as S from "../styles/pages/home"
 
 import 'keen-slider/keen-slider.min.css'
 import Stripe from "stripe"
+import shopIcon from '../assets/cart.svg'
+import type { IProduct } from '../types/IProduct'
 
 interface HomeProps {
-  products: {
-    id: string
-    name: string
-    imageUrl: string
-    price: string
-  }[]
+  products: IProduct[]
 }
 
 export default function Home({ products }: HomeProps) {
@@ -34,22 +31,31 @@ export default function Home({ products }: HomeProps) {
         <title>Home | Ignite Shop</title>
       </Head>
 
-      <HomeContainer ref={sliderRef} className="keen-slider">
+      <S.HomeContainer ref={sliderRef} className="keen-slider">
         {products.map(product => {
           return (
             <Link href={`/product/${product.id}`} key={product.id} prefetch={false}>
-              <Product className="keen-slider__slide">
+              <S.Product className="keen-slider__slide">
                 <Image src={product.imageUrl} width={520} height={480} alt="" />
 
                 <footer>
-                  <strong>{product.name}</strong>
-                  <span>{product.price}</span>
+                  <S.FooterInfo>
+                    <strong>{product.name}</strong>
+                    <span>{product.price}</span>
+                  </S.FooterInfo>
+
+                  <S.ButtonBuy>
+                    <Image 
+                      src={shopIcon}
+                      alt='Compre!' 
+                    />
+                  </S.ButtonBuy>
                 </footer>
-              </Product>
+              </S.Product>
             </Link>
           )
         })}
-      </HomeContainer>
+      </S.HomeContainer>
     </>
   )
 }
@@ -70,6 +76,7 @@ export const getStaticProps: GetStaticProps = async () => {
         style: 'currency',
         currency: 'BRL'
       }).format(price.unit_amount / 100),
+      productPrice: price.unit_amount / 100
     }
   })
 

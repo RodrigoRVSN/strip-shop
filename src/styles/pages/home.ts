@@ -61,3 +61,16 @@ export const Product = styled('div', {
     }
   }
 })
+
+export const ButtonBuy = styled('button', {
+  padding: 8,
+  backgroundColor: '#00875F',
+  borderRadius: 6,
+  cursor: 'pointer',
+  border: 0,
+})
+
+export const FooterInfo = styled('div', {
+  display: 'flex',
+  flexDirection: 'column'
+})
