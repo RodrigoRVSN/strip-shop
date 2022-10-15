@@ -24,7 +24,8 @@ export const ButtonClose = styled('button', {
   fontSize: 24,
   color: '#8D8D99',
   marginLeft: 'auto',
-  display: 'flex'
+  display: 'flex',
+  cursor: 'pointer'
 })
 
 export const ProductItem = styled('div', {
@@ -88,4 +89,10 @@ export const ButtonFinished = styled('button', {
   '&:hover': {
     opacity: 0.8
   }
+})
+
+export const EmptyText = styled('span', {
+  fontSize: 18,
+  margin: 'auto',
+  marginTop: 90,
 })

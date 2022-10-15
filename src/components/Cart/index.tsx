@@ -22,6 +22,5 @@ export const Cart = () => {
         <Drawer toggleOpen={toggleDrawerOpen} />
       }
     </>
-
   )
 }

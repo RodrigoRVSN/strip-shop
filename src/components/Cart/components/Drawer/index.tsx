@@ -18,7 +18,6 @@ export const Drawer = ({ toggleOpen }: DrawerProps) => {
     dispatch(removeFromCart(product))
   }
 
-
   async function handleBuyButton() {
     try {
       const response = await axios.post('/api/checkout', {
@@ -33,12 +32,12 @@ export const Drawer = ({ toggleOpen }: DrawerProps) => {
     }
   }
 
-
   return (
     <S.DrawerContainer>
       <S.ButtonClose onClick={toggleOpen}>X</S.ButtonClose>
 
       <S.Title>Sacola de compras</S.Title>
+
 
       {items.map(item => (
         <S.ProductItem key={item.id}>
@@ -66,6 +65,7 @@ export const Drawer = ({ toggleOpen }: DrawerProps) => {
           <span><b>Valor total</b></span>
         </S.OrderItem>
 
+
         <S.OrderItem>
           <span>{countItems} itens</span>
           <span><b>
@@ -77,9 +77,19 @@ export const Drawer = ({ toggleOpen }: DrawerProps) => {
         </S.OrderItem>
       </S.OrderInfo>
 
-      <S.ButtonFinished onClick={handleBuyButton}>
-        Finalizar compra
-      </S.ButtonFinished>
+
+      <S.OrderInfo>
+        {countItems === 0 
+          ? <S.EmptyText>Nenhum produto no carrinho</S.EmptyText>
+          : (
+            <S.ButtonFinished onClick={handleBuyButton}>
+              Finalizar compra
+            </S.ButtonFinished>
+          )
+        }
+      </S.OrderInfo>
+
+      
     </S.DrawerContainer>
   )
 }
