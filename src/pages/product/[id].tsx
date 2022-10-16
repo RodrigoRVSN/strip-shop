@@ -36,7 +36,7 @@ export default function Product({ product }: ProductProps) {
           <p>{product.description}</p>
 
           <button disabled={alreadyStored} onClick={handleBuyButton}>
-            Colocar na sacola
+            {alreadyStored ? "Item adicionado" : "Colocar na sacola"}
           </button>
         </ProductDetails>
       </ProductContainer>

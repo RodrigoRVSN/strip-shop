@@ -12,12 +12,14 @@ import 'keen-slider/keen-slider.min.css'
 import Stripe from "stripe"
 import shopIcon from '../assets/cart.svg'
 import type { IProduct } from '../types/IProduct'
+import { useCartReducer } from "../store/features/cart/cartSlice"
 
 interface HomeProps {
   products: IProduct[]
 }
 
 export default function Home({ products }: HomeProps) {
+  const { items } = useCartReducer()
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 3,
@@ -33,6 +35,8 @@ export default function Home({ products }: HomeProps) {
 
       <S.HomeContainer ref={sliderRef} className="keen-slider">
         {products.map(product => {
+          const isAddedInCart = items.find(({ id }) => id === product.id)
+
           return (
             <Link href={`/product/${product.id}`} key={product.id} prefetch={false}>
               <S.Product className="keen-slider__slide">
@@ -45,10 +49,13 @@ export default function Home({ products }: HomeProps) {
                   </S.FooterInfo>
 
                   <S.ButtonBuy>
-                    <Image 
-                      src={shopIcon}
-                      alt='Compre!' 
-                    />
+                    {isAddedInCart 
+                      ? <span>✔️</span> 
+                      : <Image 
+                          src={shopIcon}
+                          alt='Compre!' 
+                        />
+                    }
                   </S.ButtonBuy>
                 </footer>
               </S.Product>

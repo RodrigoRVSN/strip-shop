@@ -1,4 +1,10 @@
-import { styled } from "@stitches/react";
+import { keyframes, styled } from "@stitches/react";
+
+const appear = keyframes({
+  '0%': { transform: 'translateX(50%)' },
+  '100%': { transform: 'translateX(0)' },
+})
+
 
 export const DrawerContainer = styled('section', {
   position: 'fixed',
@@ -10,6 +16,7 @@ export const DrawerContainer = styled('section', {
   padding: 24,
   backgroundColor: '#202024',
   zIndex: 1,
+  animation: `${appear} 0.5s`
 })
 
 export const Title = styled('h1', {

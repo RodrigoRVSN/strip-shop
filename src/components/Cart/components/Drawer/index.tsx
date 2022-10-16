@@ -34,7 +34,7 @@ export const Drawer = ({ toggleOpen }: DrawerProps) => {
 
   return (
     <S.DrawerContainer>
-      <S.ButtonClose onClick={toggleOpen}>X</S.ButtonClose>
+      <S.ButtonClose onClick={toggleOpen}>✖️</S.ButtonClose>
 
       <S.Title>Sacola de compras</S.Title>
 
