@@ -22,9 +22,9 @@ export default function Home({ products }: HomeProps) {
   const { items } = useCartReducer()
   const [sliderRef] = useKeenSlider({
     slides: {
-      perView: 3,
+      perView: 'auto',
       spacing: 48,
-    }
+    },
   });
 
   return (

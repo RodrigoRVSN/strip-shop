@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from "next"
-import Image from "next/future/image";
+import Image from "next/image";
 import Head from "next/head";
 import Stripe from "stripe";
 import { stripe } from "../../lib/stripe";
@@ -26,7 +26,7 @@ export default function Product({ product }: ProductProps) {
 
       <ProductContainer>
         <ImageContainer>
-          <Image src={product.imageUrl} width={520} height={480} alt="" />
+          <Image src={product.imageUrl} width={520} height={480} alt={product.name} />
         </ImageContainer>
 
         <ProductDetails>
